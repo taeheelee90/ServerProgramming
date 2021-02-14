@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Server Programming</title>
+</head>
+<body>
+	<p th:text = "'Welcome to Haaga-Helia!'"></p>
+	<table>
+		<tr th:each = "student: ${students}">
+			<td th:text="${student.firstName}"></td>
+			<td th:text="${student.lastName}"></td>
+		</tr>
+	</table>
+
+</body>
+</html>
