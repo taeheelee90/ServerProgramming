@@ -9,12 +9,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import HaagaHelia.ServerProgramming.domain.Book;
 import HaagaHelia.ServerProgramming.repository.BookRepository;
+import HaagaHelia.ServerProgramming.repository.CategoryRepository;
+
+//W4 exercise is also added to this controller
 
 @Controller
-public class W3Controller {
+public class W3Controller { 
 
 	@Autowired
 	BookRepository bookRepository;
+	@Autowired
+	CategoryRepository categoryRepository;
 
 	@GetMapping("books")
 	public String booklist(Model model) {
@@ -25,6 +30,7 @@ public class W3Controller {
 	@GetMapping("/book-form")
 	public String showBookForm(Model model) {
 		model.addAttribute("book", new Book());
+		model.addAttribute("categories", categoryRepository.findAll());
 		return "addBookForm";
 	}
 
@@ -43,6 +49,7 @@ public class W3Controller {
 	@GetMapping("/edit-book/{id}")
 	public String editBook(@PathVariable("id") Long bookId, Model model) {
 		model.addAttribute("book", bookRepository.findById(bookId));
+		model.addAttribute("categories", categoryRepository.findAll());
 		return "editBookForm";
 	}
 

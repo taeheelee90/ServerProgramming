@@ -15,7 +15,14 @@
 				<input type="text" id="isbn" th:field=*{isbn}/><br>
 			<label for="year">Year</label>
 				<input type="text" id="year" th:field=*{year}/><br>
-			
+			<label for="category">Category</label>
+			<select id="category" th:field="*{category}" class="form-control">
+				<option th:each="category: ${categories}" 
+						th:value="${category.id}"
+						th:text="${category.name}">
+				</option>
+			</select>
+		
 			<input type="submit" value="submit">		
 		</form>
 	</div>

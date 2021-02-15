@@ -8,8 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import HaagaHelia.ServerProgramming.domain.Book;
-
+import HaagaHelia.ServerProgramming.domain.Category;
 import HaagaHelia.ServerProgramming.repository.BookRepository;
+import HaagaHelia.ServerProgramming.repository.CategoryRepository;
 
 
 @SpringBootApplication
@@ -22,13 +23,16 @@ public class ServerProgrammingApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(BookRepository bookRepository) {
+	public CommandLineRunner demo(BookRepository bookRepository, CategoryRepository categoryRepository) {
 		return (args) -> {
 			
-			log.info("Save books");
-			bookRepository.save(new Book("A Farewell to Arms", "Ernest Hemingway", "123-456", "1929"));
-			bookRepository.save(new Book("Annimal Farm", "George Orwell", "456-789", "1945"));
+			log.info("Save category");
+			categoryRepository.save(new Category("Novel"));
+			categoryRepository.save(new Category("IT"));			
 			
+			log.info("Save books");
+			bookRepository.save(new Book("A Farewell to Arms", "Ernest Hemingway", "123-456", "1929", categoryRepository.findByName("Novel")));
+			bookRepository.save(new Book("Annimal Farm", "George Orwell", "456-789", "1945", categoryRepository.findByName("Novel")));		
 		
 		};
 	}
