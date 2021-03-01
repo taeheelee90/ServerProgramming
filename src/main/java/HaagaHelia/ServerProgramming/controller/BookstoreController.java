@@ -11,15 +11,15 @@ import HaagaHelia.ServerProgramming.domain.Book;
 import HaagaHelia.ServerProgramming.repository.BookRepository;
 import HaagaHelia.ServerProgramming.repository.CategoryRepository;
 
-//W4 exercise is also added to this controller
 
 @Controller
-public class W3Controller { 
+public class BookstoreController {
 
 	@Autowired
 	BookRepository bookRepository;
 	@Autowired
 	CategoryRepository categoryRepository;
+	
 
 	@GetMapping("books")
 	public String booklist(Model model) {

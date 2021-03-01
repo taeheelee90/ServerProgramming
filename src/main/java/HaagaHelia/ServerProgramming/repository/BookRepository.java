@@ -6,4 +6,5 @@ import HaagaHelia.ServerProgramming.domain.Book;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
 
+	Book findBookById(Long id);
 }

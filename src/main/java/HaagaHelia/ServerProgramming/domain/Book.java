@@ -23,6 +23,7 @@ public class Book {
 	
 	@ManyToOne
 	@JoinColumn (name = "category_id")
+	//@JsonManagedReference
 	private Category category;
 
 	public Book() {
