@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,7 +20,7 @@ import HaagaHelia.ServerProgramming.repository.BookRepository;
 public class BookRestController {
 
 	@Autowired
-	BookRepository bookRepository;	
+	BookRepository bookRepository;
 
 	// Restful service to get all books
 	@RequestMapping(value = "/books")
@@ -37,6 +38,24 @@ public class BookRestController {
 	@PostMapping("/books")
 	public Book newBookRest(@RequestBody Book newBook) {
 		return bookRepository.save(newBook);
+	}
+
+	// Restful service to edit book
+	@PutMapping("/books/{id}")
+	public Book replaceBook(@RequestBody Book newBook, @PathVariable Long id) {
+
+		Book book = bookRepository.findBookById(id);
+		if (book != null) {
+			book.setTitle(newBook.getTitle());
+			book.setIsbn(newBook.getIsbn());
+			book.setYear(newBook.getYear());
+			book.setAuthor(newBook.getAuthor());
+			book.setCategory(newBook.getCategory());
+			bookRepository.save(book);
+		} else {
+			book = bookRepository.save(newBook);
+		}
+		return book;
 	}
 
 	// Restful service to delete book
